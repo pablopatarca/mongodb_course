@@ -1,0 +1,49 @@
+var MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://localhost:27017/weather', function(err, db) {
+    if(err) throw err;
+
+    var sort = [ { 'state' : 1 }, { 'temperature': -1 } ];
+    var query = { };
+    //var sort = [ { 'name' : 1 } ];
+    //var operator = { 'month_high' : true };
+    //var options = { 'new' : true };
+
+//    var cursor = db.collection('data').findAndModify(query, sort, operator, options, function(err, doc) {
+    var cursor = db.collection('data').find(query, sort, function(err, doc) {
+
+        if(err) throw err;
+
+        if (!doc) {
+            console.log("No counter found for comments.");
+	    return db.close();
+        }
+        else {
+		console.log("De document is: " + doc);
+        }
+
+    });
+
+    var stateName = "";
+    while(cursor.hasNext()) {
+	var docu = cursor.next();
+
+	if(stateName != docu.State){
+		var q = { '_id' : docu._id };
+		var operator = { 'month_high' : true };
+		//db.collection('data').update(q, operator, function(error, doc){
+		//	if(err) throw err;
+		//	if (!doc) {
+		//	    console.log("No counter found for comments.");
+		//	}
+		//});
+		stateName = docu.State;
+	}
+    }
+
+
+	
+//	while(cursor.hasNext()){
+//		cursor.next()
+//	}	
+});
