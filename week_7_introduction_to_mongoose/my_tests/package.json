@@ -1,0 +1,17 @@
+{
+  "name": "pablo",
+  "version": "0.1.0",
+  "description": "npm package test",
+  "main": ".mongorc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "npm",
+    "mongodb",
+    "couse"
+  ],
+  "author": "Pablo Patarca",
+  "license": "BSD-2-Clause"
+}

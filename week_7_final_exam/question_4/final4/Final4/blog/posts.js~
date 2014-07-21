@@ -75,7 +75,7 @@ function PostsDAO(db) {
             if (err) return callback(err, null);
 
             // XXX: Look here for final exam to see where we store "num_likes"
-
+	    // posts.update({'permalink' : permalink }, { $inc : { 'comments.'+ comment_ordinal +'.num_likes' : 1 } } );
             // fix up likes values. set to zero if data is not present
             if (typeof post.comments === 'undefined') {
                 post.comments = [];
